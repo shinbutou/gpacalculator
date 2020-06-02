@@ -79,18 +79,24 @@ fn1b1.place(relx = 0.12, rely = 0.75)
 
 
 # [View Input] Settings
-fn2_message = tk.Label(tab2, text = "Do you want to refresh?", fg='blue')
-fn2a1 = tk.Button(tab2, height = 1, width = 10, text = "Refresh", bg='blue', fg='white')
-fn2_message.place(relx = 0.10, rely = 0.12)
-fn2a1.place(relx = 0.12, rely = 0.75)
+tb2_message = tk.Label(tab2, text = "Do you want to refresh?")
+bt2_refresh = tk.Button(tab2, height = 1, width = 10, text = "Refresh")
+
+tb2_message.place(relx = 0.10, rely = 0.12)
+bt_refresh.place(relx = 0.12, rely = 0.75)
 
 
 # [Scale Switch] Settings
+lb3_four = tk.Label(tab3, text = "4")
+lb3_fp3 = tk.Label(tab3, text = "4.3")
+
+lb3_four.place(relx = 0.10, rely = 0.12)
+lb3_fp3.place(relx = 0.12, rely = 0.75)
 
 
 # [Calculation] Settings    
-fn4_message = tk.Label(tab4, text = "Do you finish entering all of the entry?", fg = 'orangered') 
-fn4a0 = tk.Button(tab4, height = 1, width = 10, text = "Calculate", bg = 'firebrick')
+tb4_message = tk.Label(tab4, text = "Do you finish entering all of the entry?") 
+fn4a0 = tk.Button(tab4, height = 1, width = 10, text = "Calculate")
 fn4_message.place(relx = 0.10, rely = 0.12)
 fn4a0.place(relx = 0.12, rely = 0.75)
 
