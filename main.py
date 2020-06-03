@@ -118,7 +118,7 @@ def refresh():
     for x, y in two.items():
         showcase.insert(END, str(x)+": "+str(y)+", 2 credit points\n")
     for x, y in one.items():
-        showcase.insert(END, str(x)+": "+str(y)+", 1 credit points\n")
+        showcase.insert(END, str(x)+": "+str(y)+", 1 credit point\n")
     for x, y in zero.items():
         showcase.insert(END, str(x)+": "+str(y)+", 0 credit points\n")
     for x, y in four.items():
