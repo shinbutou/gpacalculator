@@ -1,3 +1,4 @@
+import csv
 import tkinter as tk
 from tkinter import ttk
 
@@ -177,12 +178,27 @@ def l_import():
     three.clear()
     four.clear()
 
-    display5.set("import")
+    with open("database.csv", newline="") as csvfile:
+        rows = csv.reader(csvfile, delimiter = ";")
+        for row in rows:
+            if row[0] == "0":
+                zero[str(row[1])] = float(row[2])
+            elif row[0] == "1":
+                one[str(row[1])] = float(row[2])
+            elif row[0] == "2":
+                two[str(row[1])] = float(row[2])
+            elif row[0] == "3":
+                three[str(row[1])] = float(row[2])
+            elif row[0] == "4":
+                four[str(row[1])] = float(row[2])
+
+    display5.set(three)
+    #display5.set("Successfully imported data from database.txt in same directory.")
 
 
 def l_export():
-    database = open("database.txt", "w+", encoding="utf-8")
-    database.write("gpa_calculator_db")
+    database = open("database.csv", "w+", encoding="utf-8")
+    database.write("gpa_calculator_database")
     for x,y in zero.items():
         database.write("\n0;"+x+";"+str(y))
     for x,y in one.items():
