@@ -7,7 +7,15 @@ system = tk.Tk()
 system.title("GPA Calculator")
 system.geometry("600x500")
 
+
+#Initialization
 scale = "new"
+zero = {}
+one = {}
+two = {}
+three = {}
+four = {}
+
 
 # Logic Settings
 def new(p):
@@ -66,20 +74,19 @@ def input():
         Cgate = True
         
     if Ggate and Cgate:
-        combination = [s0, g0, c0]
-            key = combination[0]
-            value = combination[1]
-            if combination[2] == "0":
-                zero[key] = float(value)
-            elif combination[2] == "1":
-                one[key] = float(value)
-            elif combination[2] == "2":
-                two[key] = float(value)
-            elif  combination[2] == "3":
-                three[key] = float(value)
-            elif combination[2] == "4":
-                four[key] = float(value)
-
+        combination = [str(s0), str(g0), str(c0)]
+        key = combination[0]
+        value = combination[1]
+        if combination[2] == "0":
+            zero[key] = float(value)
+        elif combination[2] == "1":
+            one[key] = float(value)
+        elif combination[2] == "2":
+            two[key] = float(value)
+        elif  combination[2] == "3":
+            three[key] = float(value)
+        elif combination[2] == "4":
+            four[key] = float(value)
         display1.set("You've successfully input the follwoing information:\n\n"+
                      "Subject: "+str(s0)+"\n"+
                      "Grade: "+str(g0)+"\n"+
@@ -95,11 +102,11 @@ def refresh():
 
 def old_scale():
     switch = "old"
-    display3.set("You've successfully switched to the mode with the previous 4 points system.")
+    display3.set("You've successfully switched to the mode of the previous 4 points system.")
 
 def new_scale():
     switch = "new"
-    display3.set("You've successfully switched to the mode with the current 4.3 points system.")
+    display3.set("You've successfully switched to the mode of the current 4.3 points system.")
 
 def calculate():
     credit_sum = len(zero)*0 + len(one)*1 + len(two)*2 + len(three)*3 + len(four)*4
@@ -149,12 +156,12 @@ def calculate():
     
     if credit_sum != 0:
         average = float(grand_sum/credit_sum)
-        gpa = float(xgrand_sum/credit_sum)
+        gpa = float(cgrand_sum/credit_sum)
     else:
         score = 0
         gpa = 0
     
-    display4.set("")
+    display4.set(str(average)+"\n"+str(gpa))
 
 
 def l_import():
@@ -245,7 +252,7 @@ tb2_message = tk.Label(tab2, text = "Click to update the information:")
 bt2_refresh = tk.Button(tab2, height = 2, width = 11, text = "Refresh")
 
 tb2_message.place(relx = 0.05, rely = 0.05)
-bt2_refresh.place(relx = 0.05, rely = 0.2)
+bt2_refresh.place(relx = 0.05, rely = 0.11)
 
 
 # [Scale Switch] Settings
@@ -254,8 +261,8 @@ bt3_four = tk.Button(tab3, text = "4", height = 3, width = 6, command = old_scal
 bt3_fp3 = tk.Button(tab3, text = "4.3", height = 3, width = 6, command = new_scale)
 
 tb3_message.place(relx = 0.05, rely = 0.05)
-bt3_four.place(relx = 0.05, rely = 0.15)
-bt3_fp3.place(relx = 0.15, rely = 0.15)
+bt3_four.place(relx = 0.05, rely = 0.11)
+bt3_fp3.place(relx = 0.18, rely = 0.11)
 
 
 # [Calculation] Settings
@@ -263,7 +270,7 @@ tb4_message = tk.Label(tab4, text = "Based on current input:")
 bt4_calculate = tk.Button(tab4, height = 2, width = 11, text = "Calculate", command = calculate)
 
 tb4_message.place(relx = 0.05, rely = 0.05)
-bt4_calculate.place(relx = 0.05, rely = 0.2)
+bt4_calculate.place(relx = 0.05, rely = 0.11)
 
 
 # [Import/Export Data] Settings
@@ -272,8 +279,8 @@ bt5_import = tk.Button(tab5, height = 2, width = 11, text = "Import", command = 
 bt5_export = tk.Button(tab5, height = 2, width = 11, text = "Export", command = l_export)
 
 tb5_message.place(relx = 0.05, rely = 0.05)
-bt5_import.place(relx = 0.05, rely = 0.15)
-bt5_export.place(relx = 0.05, rely = 0.25)
+bt5_import.place(relx = 0.05, rely = 0.11)
+bt5_export.place(relx = 0.05, rely = 0.22)
 
 
 # [Information] Settings
@@ -282,8 +289,8 @@ bt6_help = tk.Button(tab6, height = 2, width = 11, text = "Help", command = help
 bt6_about = tk.Button(tab6, height = 2, width = 11, text = "About", command = about)
 
 tb6_message.place(relx = 0.05, rely = 0.05)
-bt6_help.place(relx = 0.05, rely = 0.15)
-bt6_about.place(relx = 0.05, rely = 0.25)
+bt6_help.place(relx = 0.05, rely = 0.11)
+bt6_about.place(relx = 0.05, rely = 0.22)
 
 
 system.mainloop()
