@@ -37,7 +37,7 @@ def new(p):
     else:
         return 0
 
-def original(p):
+def old(p):
     p = float(p)
     if p >= 0 and p < 50:
         return 0
@@ -102,7 +102,60 @@ def new_scale():
     display3.set("You've successfully switched to the mode with the current 4.3 points system.")
 
 def calculate():
+    credit_sum = len(zero)*0 + len(one)*1 + len(two)*2 + len(three)*3 + len(four)*4
+    
+    czero = zero.copy()
+    cone = one.copy()
+    ctwo = two.copy()
+    cthree = three.copy()
+    cfour = four.copy()
+
+    if scale == "new":
+        for x,y in czero.items():
+            czero[x] = new(y)
+        for x,y in cone.items():
+            cone[x] = new(y)
+        for x,y in ctwo.items():
+            ctwo[x] = new(y)
+        for x,y in cthree.items():
+            cthree[x] = new(y)
+        for x,y in cfour.items():
+            cfour[x] = new(y)
+    elif scale == "old":
+        for x,y in czero.items():
+            czero[x] = old(y)
+        for x,y in cone.items():
+            cone[x] == old(y)
+        for x,y in ctwo.items():
+            ctwo[x] = old(y)
+        for x,y in cthree.items():
+            cthree[x] = old(y)
+        for x,y in cfour.items():
+            cfour[x] = old(y)
+
+    zero_sum = sum(zero.values())
+    one_sum = sum(one.values())
+    two_sum = sum(two.values())
+    three_sum = sum(three.values())
+    four_sum = sum(four.values())
+    czero_sum = sum(czero.values())
+    cone_sum = sum(cone.values())
+    ctwo_sum = sum(ctwo.values())
+    cthree_sum = sum(cthree.values())
+    cfour_sum = sum(cfour.values())
+
+    grand_sum = zero_sum*0 + one_sum*1 + two_sum*2 + three_sum*3 + four_sum*4
+    cgrand_sum = czero_sum*0 + cone_sum*1 + ctwo_sum*2 + cthree_sum*3 + cfour_sum*4
+    
+    if credit_sum != 0:
+        average = float(grand_sum/credit_sum)
+        gpa = float(xgrand_sum/credit_sum)
+    else:
+        score = 0
+        gpa = 0
+    
     display4.set("")
+
 
 def l_import():
     display5.set("import")
