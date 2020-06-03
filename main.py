@@ -71,20 +71,23 @@ def old(p):
 
 # Functions Settings
 def input():
-    s0 = subject.get()
-    g0 = grade.get()
-    c0 = credit.get()
+    sinput = subject.get()
+    ginput = grade.get()
+    cinput = credit.get()
 
+    Sgate = False
     Ggate = False
     Cgate = False
-
-    if g0 >= 0 and g0 <= 100:
+    
+    if sinput != "":
+        Sgate = True
+    if ginput >= 0 and ginput <= 100:
         Ggate = True
-    if c0 == 0 or 1 or 2 or 3 or 4:
+    if cinput == 0 or 1 or 2 or 3 or 4:
         Cgate = True
         
-    if Ggate and Cgate:
-        combination = [str(s0), str(g0), str(c0)]
+    if Ggate and Cgate and Sgate:
+        combination = [str(sinput), str(ginput), str(cinput)]
         key = combination[0]
         value = combination[1]
         if combination[2] == "0":
@@ -98,14 +101,14 @@ def input():
         elif combination[2] == "4":
             four[key] = float(value)
         display1.set("You've successfully input the follwoing information:\n\n"+
-                     "Subject: "+str(s0)+"\n"+
-                     "Grade: "+str(g0)+"\n"+
-                     "Credits: "+str(c0)+"\n")
+                     "Subject: "+str(sinput)+"\n"+
+                     "Grade: "+str(ginput)+"\n"+
+                     "Credits: "+str(cinput)+"\n")
     else:
         display1.set("Something went wrong! Please check:\n\n"+
                      "Grades are restricted to values between 0 and 100.\n"+
                      "The program currently acknowledges courses rewarding up to 4 credit points only.\n\n"+
-                     "Any suggestion is welcomed, contact information could be located in the [Information] tab.")
+                     "Any suggestion is welcomed, contact information could be located in the information tab.")
 
 
 def refresh():
@@ -136,6 +139,8 @@ def new_scale():
 
 def calculate():
     credit_sum = len(zero)*0 + len(one)*1 + len(two)*2 + len(three)*3 + len(four)*4
+    course_count = len(zero) + len(one) + len(two) + len(three) + len(four)
+
     
     czero = zero.copy()
     cone = one.copy()
@@ -143,30 +148,31 @@ def calculate():
     cthree = three.copy()
     cfour = four.copy()
 
-    if scale_switch == "new":
-        for x,y in czero.items():
-            czero[x] = new(y)
-        for x,y in cone.items():
-            cone[x] = new(y)
-        for x,y in ctwo.items():
-            ctwo[x] = new(y)
-        for x,y in cthree.items():
-            cthree[x] = new(y)
-        for x,y in cfour.items():
-            cfour[x] = new(y)
-    elif scale_switch == "old":
-        for x,y in czero.items():
-            czero[x] = old(y)
-        for x,y in cone.items():
-            cone[x] = old(y)
-        for x,y in ctwo.items():
-            ctwo[x] = old(y)
-        for x,y in cthree.items():
-            cthree[x] = old(y)
-        for x,y in cfour.items():
-            cfour[x] = old(y)
+    if course_count != 0:
+        if scale_switch == "new":
+            for x,y in czero.items():
+                czero[x] = new(y)
+            for x,y in cone.items():
+                cone[x] = new(y)
+            for x,y in ctwo.items():
+                ctwo[x] = new(y)
+            for x,y in cthree.items():
+                cthree[x] = new(y)
+            for x,y in cfour.items():
+                cfour[x] = new(y)
+        elif scale_switch == "old":
+            for x,y in czero.items():
+                czero[x] = old(y)
+            for x,y in cone.items():
+                cone[x] = old(y)
+            for x,y in ctwo.items():
+                ctwo[x] = old(y)
+            for x,y in cthree.items():
+                cthree[x] = old(y)
+            for x,y in cfour.items():
+                cfour[x] = old(y)
     else:
-        display.set("Please indicate the desired GPA scale.")
+        display4.set("Please input data before calculation.")
 
     zero_sum = sum(zero.values())
     one_sum = sum(one.values())
@@ -189,7 +195,10 @@ def calculate():
         score = 0
         gpa = 0
     
-    display4.set(str(round(average, 2))+"\n"+str(round(gpa, 2)))
+    display4.set("According to the input data, calculated:\n\n"+
+                 "Credits Acquired: "+str(credit_sum)+"\n"+
+                 "Overall Average: "+str(round(average, 2))+"\n"+
+                 "Overall GPA: "+str(round(gpa, 2)))
 
 
 def l_import():
@@ -241,7 +250,9 @@ def guide():
                  "3. Choose the preferable GPA scale. (optional)\n"+
                  "4. Calculate indices, including overall GPA.\n"+
                  "5. Export data for future updates. (optional)\n\n\n"+
+                 "- "*30+"\n\n"+
                  "*Store the file in confinement for your privacy.\n\n"+
+                 "- "*30+"\n\n"+
                  "*To import data, the file should be placed in the same directory as the program itself.")
 
 
