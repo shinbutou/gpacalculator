@@ -7,6 +7,50 @@ system = tk.Tk()
 system.title("GPA Calculator")
 system.geometry("600x500")
 
+scale = "new"
+
+# Logic Settings
+def new(p):
+    p = float(p)
+    if p >= 0 and p < 50:
+        return 0
+    elif p >= 50 and p < 60:
+        return 1
+    elif p >= 60 and p < 63:
+        return 1.7
+    elif p >= 63 and p < 67:
+        return 2
+    elif p >= 67 and p < 70:
+        return 2.3
+    elif p >= 70 and p < 73:
+        return 2.7
+    elif p >= 73 and p < 77:
+        return 3
+    elif p >= 77 and p < 80:
+        return 3.3
+    elif p >= 80 and p < 85:
+        return 3.7
+    elif p >= 85 and p < 90:
+        return 4
+    elif p >= 90 and p < 100:
+        return 4.3
+    else:
+        return 0
+
+def original(p):
+    p = float(p)
+    if p >= 0 and p < 50:
+        return 0
+    elif p >= 50 and p < 60:
+        return 1
+    elif p >= 60 and p < 70:
+        return 2
+    elif p >= 70 and p < 80:
+        return 3
+    elif p >= 80 and p <= 100:
+        return 4
+
+
 # Functions Settings
 def input():
     s0 = subject.get()
@@ -21,7 +65,21 @@ def input():
     if c0 == 0 or 1 or 2 or 3 or 4:
         Cgate = True
         
-    if Ggate and Cgate:    
+    if Ggate and Cgate:
+        combination = [s0, g0, c0]
+            key = combination[0]
+            value = combination[1]
+            if combination[2] == "0":
+                zero[key] = float(value)
+            elif combination[2] == "1":
+                one[key] = float(value)
+            elif combination[2] == "2":
+                two[key] = float(value)
+            elif  combination[2] == "3":
+                three[key] = float(value)
+            elif combination[2] == "4":
+                four[key] = float(value)
+
         display1.set("You've successfully input the follwoing information:\n\n"+
                      "Subject: "+str(s0)+"\n"+
                      "Grade: "+str(g0)+"\n"+
@@ -36,13 +94,15 @@ def refresh():
     display2.set("this is to refresh.")
 
 def old_scale():
-    display3.set("old scale")
+    switch = "old"
+    display3.set("You've successfully switched to the mode with the previous 4 points system.")
 
 def new_scale():
-    display3.set("new scale")
+    switch = "new"
+    display3.set("You've successfully switched to the mode with the current 4.3 points system.")
 
 def calculate():
-    display4.set("cal")
+    display4.set("")
 
 def l_import():
     display5.set("import")
