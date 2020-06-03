@@ -9,6 +9,7 @@ system.geometry("600x500")
 
 
 #Initialization
+calculation_checker = False
 scale = "new"
 zero = {}
 one = {}
@@ -97,16 +98,20 @@ def input():
                      "The program currently acknowledges courses rewarding up to 4 credit points only.\n\n"+
                      "Any suggestion is welcomed, contact information could be located in the [Information] tab.")
 
+
 def refresh():
     display2.set("this is to refresh.")
+
 
 def old_scale():
     switch = "old"
     display3.set("You've successfully switched to the mode of the previous 4 points system.")
 
+
 def new_scale():
     switch = "new"
     display3.set("You've successfully switched to the mode of the current 4.3 points system.")
+
 
 def calculate():
     credit_sum = len(zero)*0 + len(one)*1 + len(two)*2 + len(three)*3 + len(four)*4
@@ -157,6 +162,7 @@ def calculate():
     if credit_sum != 0:
         average = float(grand_sum/credit_sum)
         gpa = float(cgrand_sum/credit_sum)
+        calculation_checker = True
     else:
         score = 0
         gpa = 0
@@ -165,16 +171,49 @@ def calculate():
 
 
 def l_import():
+    zero.clear()
+    one.clear()
+    two.clear()
+    three.clear()
+    four.clear()
+
     display5.set("import")
 
-def l_export():
-    display5.set("export")
 
-def help():
-    display6.set("it's working now.")
+def l_export():
+    database = open("database.txt", "w+", encoding="utf-8")
+    database.write("gpa_calculator_db")
+    for x,y in zero.items():
+        database.write("\n0;"+x+";"+str(y))
+    for x,y in one.items():
+        database.write("\n1;"+x+";"+str(y))
+    for x,y in two.items():
+        database.write("\n2;"+x+";"+str(y))
+    for x,y in three.items():
+        database.write("\n3;"+x+";"+str(y))
+    for x,y in four.items():
+        database.write("\n4;"+x+";"+str(y))
+    database.close()
+
+    display5.set("Successfully exported an importable file in the same directory for future updates.")
+
+
+def guide():
+    display6.set("*The standand procedure is listed below:\n\n"+
+                 "1. Input or import data.\n"+
+                 "2. Check the data. (optional)\n"+
+                 "3. Choose the preferable GPA scale. (optional)\n"+
+                 "4. Calculate indices, including overall GPA.\n"+
+                 "5. Export data for future updates. (optional)\n\n\n"+
+                 "*Store the file in confinement for your privacy.\n\n"+
+                 "*To import data, the file should be placed in the same directory as the program itself.")
+
 
 def about():
-    display6.set("it's working now.")
+    display6.set("The GPA Calculator program was designed to provide an intuitive measure to catalog "+
+                 "and calculate the crucial indices for students of National Chengchi University.\n\n"+
+                 "For problem reporting and feature suggestion, you would be able to reach the developer "+
+                 "through the university email address (106308049).")
 
 
 # Tab Settings
@@ -285,7 +324,7 @@ bt5_export.place(relx = 0.05, rely = 0.22)
 
 # [Information] Settings
 tb6_message = tk.Label(tab6, text = "Functions:") 
-bt6_help = tk.Button(tab6, height = 2, width = 11, text = "Help", command = help)
+bt6_help = tk.Button(tab6, height = 2, width = 11, text = "Help", command = guide)
 bt6_about = tk.Button(tab6, height = 2, width = 11, text = "About", command = about)
 
 tb6_message.place(relx = 0.05, rely = 0.05)
