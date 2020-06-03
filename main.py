@@ -1,5 +1,6 @@
 import csv
 import tkinter as tk
+from tkinter import *
 from tkinter import ttk
 from tkinter import scrolledtext
 
@@ -12,16 +13,16 @@ system.geometry("625x525")
 
 #Initialization
 gpa_switch = True
-zero = {}
-one = {}
-two = {}
-three = {}
-four = {}
-czero = {}
-cone = {}
-ctwo = {}
-cthree = {}
-cfour = {}
+zero = dict()
+one = dict()
+two = dict()
+three = dict()
+four = dict()
+czero = dict()
+cone = dict()
+ctwo = dict()
+cthree = dict()
+cfour = dict()
 
 
 # Logic Settings
@@ -106,7 +107,18 @@ def input():
 
 
 def refresh():
-    display2.set("")
+    showcase.delete(1.0, END)
+    for x, y in three.items():
+        showcase.insert(END, str(x)+": "+str(y)+", 3 credit points\n")
+    for x, y in two.items():
+        showcase.insert(END, str(x)+": "+str(y)+", 2 credit points\n")
+    for x, y in one.items():
+        showcase.insert(END, str(x)+": "+str(y)+", 1 credit points\n")
+    for x, y in zero.items():
+        showcase.insert(END, str(x)+": "+str(y)+", 0 credit points\n")
+    for x, y in four.items():
+        showcase.insert(END, str(x)+": "+str(y)+", 4 credit points\n")
+    
 
 def old_scale():
     gpa_switch = False
@@ -280,8 +292,6 @@ canvas4.place(relx=0.05, rely=0.05)
 canvas5.place(relx=0.05, rely=0.05)
 canvas6.place(relx=0.05, rely=0.05)
 
-showcase = scrolledtext.ScrolledText(tab2, wrap = tk.WORD, width = 68, height = 20)
-showcase.place(relx=0.05, rely=0.25)
 
 # [Input Data] Settings
 subject = tk.StringVar()
@@ -309,9 +319,11 @@ fn1b1.place(relx = 0.6, rely = 0.51)
 # [View Input] Settings
 tb2_message = tk.Label(tab2, text = "Click to update the information:")
 bt2_refresh = tk.Button(tab2, height = 2, width = 11, text = "Refresh", command = refresh)
+showcase = scrolledtext.ScrolledText(tab2, wrap = tk.WORD, width = 68, height = 20)
 
 tb2_message.place(relx = 0.6, rely = 0.05)
 bt2_refresh.place(relx = 0.6, rely = 0.11)
+showcase.place(relx=0.05, rely=0.25)
 
 
 # [Scale Switch] Settings
