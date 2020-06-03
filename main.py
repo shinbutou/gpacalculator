@@ -1,22 +1,27 @@
 import csv
 import tkinter as tk
 from tkinter import ttk
+from tkinter import scrolledtext
 
 
 # Program Settings
 system = tk.Tk()
 system.title("GPA Calculator")
-system.geometry("600x500")
+system.geometry("625x525")
 
 
 #Initialization
-calculation_checker = False
-scale = "new"
+gpa_switch = True
 zero = {}
 one = {}
 two = {}
 three = {}
 four = {}
+czero = {}
+cone = {}
+ctwo = {}
+cthree = {}
+cfour = {}
 
 
 # Logic Settings
@@ -101,16 +106,15 @@ def input():
 
 
 def refresh():
-    display2.set("this is to refresh.")
-
+    display2.set("")
 
 def old_scale():
-    switch = "old"
+    gpa_switch = False
     display3.set("You've successfully switched to the mode of the previous 4 points system.")
 
 
 def new_scale():
-    switch = "new"
+    gpa_switch = True
     display3.set("You've successfully switched to the mode of the current 4.3 points system.")
 
 
@@ -123,7 +127,7 @@ def calculate():
     cthree = three.copy()
     cfour = four.copy()
 
-    if scale == "new":
+    if gpa_switch:
         for x,y in czero.items():
             czero[x] = new(y)
         for x,y in cone.items():
@@ -134,11 +138,11 @@ def calculate():
             cthree[x] = new(y)
         for x,y in cfour.items():
             cfour[x] = new(y)
-    elif scale == "old":
+    else:
         for x,y in czero.items():
             czero[x] = old(y)
         for x,y in cone.items():
-            cone[x] == old(y)
+            cone[x] = old(y)
         for x,y in ctwo.items():
             ctwo[x] = old(y)
         for x,y in cthree.items():
@@ -163,7 +167,6 @@ def calculate():
     if credit_sum != 0:
         average = float(grand_sum/credit_sum)
         gpa = float(cgrand_sum/credit_sum)
-        calculation_checker = True
     else:
         score = 0
         gpa = 0
@@ -192,8 +195,7 @@ def l_import():
             elif row[0] == "4":
                 four[str(row[1])] = float(row[2])
 
-    display5.set(three)
-    #display5.set("Successfully imported data from database.txt in same directory.")
+    display5.set("Successfully imported data from database.txt in same directory.")
 
 
 def l_export():
@@ -271,13 +273,15 @@ canvas4 = tk.Message(tab4, textvariable = display4, width = 300)
 canvas5 = tk.Message(tab5, textvariable = display5, width = 300)
 canvas6 = tk.Message(tab6, textvariable = display6, width = 300)
 
-canvas1.place(relx=0.4, rely=0.05)
-canvas2.place(relx=0.4, rely=0.05)
-canvas3.place(relx=0.4, rely=0.05)
-canvas4.place(relx=0.4, rely=0.05)
-canvas5.place(relx=0.4, rely=0.05)
-canvas6.place(relx=0.4, rely=0.05)
+canvas1.place(relx=0.05, rely=0.05)
+canvas2.place(relx=0.05, rely=0.05)
+canvas3.place(relx=0.05, rely=0.05)
+canvas4.place(relx=0.05, rely=0.05)
+canvas5.place(relx=0.05, rely=0.05)
+canvas6.place(relx=0.05, rely=0.05)
 
+showcase = scrolledtext.ScrolledText(tab2, wrap = tk.WORD, width = 68, height = 20)
+showcase.place(relx=0.05, rely=0.25)
 
 # [Input Data] Settings
 subject = tk.StringVar()
@@ -292,22 +296,22 @@ lb1c1 = tk.Label(tab1, text = "Credit:")
 et1c1 = tk.Entry(tab1, textvariable = credit)
 fn1b1 = tk.Button(tab1, height = 2, width = 11, text = "Enter", command = input)
 
-lb1a1.place(relx = 0.05, rely = 0.05)
-et1a1.place(relx = 0.05, rely = 0.1)
-lb1b1.place(relx = 0.05, rely = 0.18)
-et1b1.place(relx = 0.05, rely = 0.23)
-lb1c1.place(relx = 0.05, rely = 0.31)
-et1c1.place(relx = 0.05, rely = 0.36)
-fn1b1.place(relx = 0.05, rely = 0.5)
+lb1a1.place(relx = 0.6, rely = 0.06)
+et1a1.place(relx = 0.6, rely = 0.11)
+lb1b1.place(relx = 0.6, rely = 0.19)
+et1b1.place(relx = 0.6, rely = 0.24)
+lb1c1.place(relx = 0.6, rely = 0.32)
+et1c1.place(relx = 0.6, rely = 0.37)
+fn1b1.place(relx = 0.6, rely = 0.51)
 
 
 
 # [View Input] Settings
 tb2_message = tk.Label(tab2, text = "Click to update the information:")
-bt2_refresh = tk.Button(tab2, height = 2, width = 11, text = "Refresh")
+bt2_refresh = tk.Button(tab2, height = 2, width = 11, text = "Refresh", command = refresh)
 
-tb2_message.place(relx = 0.05, rely = 0.05)
-bt2_refresh.place(relx = 0.05, rely = 0.11)
+tb2_message.place(relx = 0.6, rely = 0.05)
+bt2_refresh.place(relx = 0.6, rely = 0.11)
 
 
 # [Scale Switch] Settings
@@ -315,17 +319,17 @@ tb3_message = tk.Label(tab3, text = "GPA Scale:")
 bt3_four = tk.Button(tab3, text = "4", height = 3, width = 6, command = old_scale)
 bt3_fp3 = tk.Button(tab3, text = "4.3", height = 3, width = 6, command = new_scale)
 
-tb3_message.place(relx = 0.05, rely = 0.05)
-bt3_four.place(relx = 0.05, rely = 0.11)
-bt3_fp3.place(relx = 0.18, rely = 0.11)
+tb3_message.place(relx = 0.6, rely = 0.05)
+bt3_four.place(relx = 0.6, rely = 0.11)
+bt3_fp3.place(relx = 0.74, rely = 0.11)
 
 
 # [Calculation] Settings
 tb4_message = tk.Label(tab4, text = "Based on current input:")     
 bt4_calculate = tk.Button(tab4, height = 2, width = 11, text = "Calculate", command = calculate)
 
-tb4_message.place(relx = 0.05, rely = 0.05)
-bt4_calculate.place(relx = 0.05, rely = 0.11)
+tb4_message.place(relx = 0.6, rely = 0.05)
+bt4_calculate.place(relx = 0.6, rely = 0.11)
 
 
 # [Import/Export Data] Settings
@@ -333,9 +337,9 @@ tb5_message = tk.Label(tab5, text = "Functions:")
 bt5_import = tk.Button(tab5, height = 2, width = 11, text = "Import", command = l_import)
 bt5_export = tk.Button(tab5, height = 2, width = 11, text = "Export", command = l_export)
 
-tb5_message.place(relx = 0.05, rely = 0.05)
-bt5_import.place(relx = 0.05, rely = 0.11)
-bt5_export.place(relx = 0.05, rely = 0.22)
+tb5_message.place(relx = 0.6, rely = 0.05)
+bt5_import.place(relx = 0.6, rely = 0.11)
+bt5_export.place(relx = 0.6, rely = 0.23)
 
 
 # [Information] Settings
@@ -343,9 +347,9 @@ tb6_message = tk.Label(tab6, text = "Functions:")
 bt6_help = tk.Button(tab6, height = 2, width = 11, text = "Help", command = guide)
 bt6_about = tk.Button(tab6, height = 2, width = 11, text = "About", command = about)
 
-tb6_message.place(relx = 0.05, rely = 0.05)
-bt6_help.place(relx = 0.05, rely = 0.11)
-bt6_about.place(relx = 0.05, rely = 0.22)
+tb6_message.place(relx = 0.6, rely = 0.05)
+bt6_help.place(relx = 0.6, rely = 0.11)
+bt6_about.place(relx = 0.6, rely = 0.23)
 
 
 system.mainloop()
