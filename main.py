@@ -12,7 +12,7 @@ system.geometry("625x525")
 
 
 #Initialization
-gpa_switch = True
+scale_switch = "old"
 zero = dict()
 one = dict()
 two = dict()
@@ -28,6 +28,7 @@ cfour = dict()
 # Logic Settings
 def new(p):
     p = float(p)
+
     if p >= 0 and p < 50:
         return 0
     elif p >= 50 and p < 60:
@@ -55,6 +56,7 @@ def new(p):
 
 def old(p):
     p = float(p)
+
     if p >= 0 and p < 50:
         return 0
     elif p >= 50 and p < 60:
@@ -121,12 +123,14 @@ def refresh():
     
 
 def old_scale():
-    gpa_switch = False
+    global scale_switch
+    scale_switch = "old"
     display3.set("You've successfully switched to the mode of the previous 4 points system.")
 
 
 def new_scale():
-    gpa_switch = True
+    global scale_switch
+    scale_switch = "new"
     display3.set("You've successfully switched to the mode of the current 4.3 points system.")
 
 
@@ -139,7 +143,7 @@ def calculate():
     cthree = three.copy()
     cfour = four.copy()
 
-    if gpa_switch:
+    if scale_switch == "new":
         for x,y in czero.items():
             czero[x] = new(y)
         for x,y in cone.items():
@@ -150,7 +154,7 @@ def calculate():
             cthree[x] = new(y)
         for x,y in cfour.items():
             cfour[x] = new(y)
-    else:
+    elif scale_switch == "old":
         for x,y in czero.items():
             czero[x] = old(y)
         for x,y in cone.items():
@@ -161,6 +165,8 @@ def calculate():
             cthree[x] = old(y)
         for x,y in cfour.items():
             cfour[x] = old(y)
+    else:
+        display.set("Please indicate the desired GPA scale.")
 
     zero_sum = sum(zero.values())
     one_sum = sum(one.values())
@@ -183,7 +189,7 @@ def calculate():
         score = 0
         gpa = 0
     
-    display4.set(str(average)+"\n"+str(gpa))
+    display4.set(str(round(average, 2))+"\n"+str(round(gpa, 2)))
 
 
 def l_import():
