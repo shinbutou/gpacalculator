@@ -7,6 +7,55 @@ system = tk.Tk()
 system.title("GPA Calculator")
 system.geometry("600x500")
 
+# Functions Settings
+def input():
+    s0 = subject.get()
+    g0 = grade.get()
+    c0 = credit.get()
+
+    Ggate = False
+    Cgate = False
+
+    if g0 >= 0 and g0 <= 100:
+        Ggate = True
+    if c0 == 0 or 1 or 2 or 3 or 4:
+        Cgate = True
+        
+    if Ggate and Cgate:    
+        display1.set("You've successfully input the follwoing information:\n\n"+
+                     "Subject: "+str(s0)+"\n"+
+                     "Grade: "+str(g0)+"\n"+
+                     "Credits: "+str(c0)+"\n")
+    else:
+        display1.set("Something went wrong! Please check:\n\n"+
+                     "Grades are restricted to values between 0 and 100.\n"+
+                     "The program currently acknowledges courses rewarding up to 4 credit points only.\n\n"+
+                     "Any suggestion is welcomed, contact information could be located in the [Information] tab.")
+
+def refresh():
+    display2.set("this is to refresh.")
+
+def old_scale():
+    display3.set("old scale")
+
+def new_scale():
+    display3.set("new scale")
+
+def calculate():
+    display4.set("cal")
+
+def l_import():
+    display5.set("import")
+
+def l_export():
+    display5.set("export")
+
+def help():
+    display6.set("it's working now.")
+
+def about():
+    display6.set("it's working now.")
+
 
 # Tab Settings
 tab_parent = ttk.Notebook(system)
@@ -47,74 +96,81 @@ canvas4 = tk.Message(tab4, textvariable = display4, width = 300)
 canvas5 = tk.Message(tab5, textvariable = display5, width = 300)
 canvas6 = tk.Message(tab6, textvariable = display6, width = 300)
 
-canvas1.place(relx=0.55, rely=0.05)
-canvas2.place(relx=0.55, rely=0.05)
-canvas3.place(relx=0.55, rely=0.05)
-canvas4.place(relx=0.55, rely=0.05)
-canvas5.place(relx=0.55, rely=0.05)
-canvas6.place(relx=0.55, rely=0.05)
+canvas1.place(relx=0.4, rely=0.05)
+canvas2.place(relx=0.4, rely=0.05)
+canvas3.place(relx=0.4, rely=0.05)
+canvas4.place(relx=0.4, rely=0.05)
+canvas5.place(relx=0.4, rely=0.05)
+canvas6.place(relx=0.4, rely=0.05)
 
 
 # [Input Data] Settings
-subject = 0
-grade = 0
-credit = 0
-    
+subject = tk.StringVar()
+grade = tk.DoubleVar()
+credit = tk.IntVar()
+
 lb1a1 = tk.Label(tab1, text = "Subject:")
 et1a1 = tk.Entry(tab1, textvariable = subject)
 lb1b1 = tk.Label(tab1, text = "Grade:")
 et1b1 = tk.Entry(tab1, textvariable = grade)
 lb1c1 = tk.Label(tab1, text = "Credit:")
 et1c1 = tk.Entry(tab1, textvariable = credit)
-fn1b1 = tk.Button(tab1, height = 1, width = 10, text = "Enter")
+fn1b1 = tk.Button(tab1, height = 2, width = 11, text = "Enter", command = input)
 
-lb1a1.place(relx = 0.05, rely = 0.22)
-et1a1.place(relx = 0.05, rely = 0.27)
-lb1b1.place(relx = 0.05, rely = 0.35)
-et1b1.place(relx = 0.05, rely = 0.40)
-lb1c1.place(relx = 0.05, rely = 0.48)
-et1c1.place(relx = 0.05, rely = 0.53)
-fn1b1.place(relx = 0.12, rely = 0.75)
+lb1a1.place(relx = 0.05, rely = 0.05)
+et1a1.place(relx = 0.05, rely = 0.1)
+lb1b1.place(relx = 0.05, rely = 0.18)
+et1b1.place(relx = 0.05, rely = 0.23)
+lb1c1.place(relx = 0.05, rely = 0.31)
+et1c1.place(relx = 0.05, rely = 0.36)
+fn1b1.place(relx = 0.05, rely = 0.5)
 
 
 
 # [View Input] Settings
-tb2_message = tk.Label(tab2, text = "Do you want to refresh?")
-bt2_refresh = tk.Button(tab2, height = 1, width = 10, text = "Refresh")
+tb2_message = tk.Label(tab2, text = "Click to update the information:")
+bt2_refresh = tk.Button(tab2, height = 2, width = 11, text = "Refresh")
 
-tb2_message.place(relx = 0.10, rely = 0.12)
-bt_refresh.place(relx = 0.12, rely = 0.75)
+tb2_message.place(relx = 0.05, rely = 0.05)
+bt2_refresh.place(relx = 0.05, rely = 0.2)
 
 
 # [Scale Switch] Settings
-lb3_four = tk.Label(tab3, text = "4")
-lb3_fp3 = tk.Label(tab3, text = "4.3")
+tb3_message = tk.Label(tab3, text = "GPA Scale:")
+bt3_four = tk.Button(tab3, text = "4", height = 3, width = 6, command = old_scale)
+bt3_fp3 = tk.Button(tab3, text = "4.3", height = 3, width = 6, command = new_scale)
 
-lb3_four.place(relx = 0.10, rely = 0.12)
-lb3_fp3.place(relx = 0.12, rely = 0.75)
+tb3_message.place(relx = 0.05, rely = 0.05)
+bt3_four.place(relx = 0.05, rely = 0.15)
+bt3_fp3.place(relx = 0.15, rely = 0.15)
 
 
-# [Calculation] Settings    
-tb4_message = tk.Label(tab4, text = "Do you finish entering all of the entry?") 
-fn4a0 = tk.Button(tab4, height = 1, width = 10, text = "Calculate")
-fn4_message.place(relx = 0.10, rely = 0.12)
-fn4a0.place(relx = 0.12, rely = 0.75)
+# [Calculation] Settings
+tb4_message = tk.Label(tab4, text = "Based on current input:")     
+bt4_calculate = tk.Button(tab4, height = 2, width = 11, text = "Calculate", command = calculate)
+
+tb4_message.place(relx = 0.05, rely = 0.05)
+bt4_calculate.place(relx = 0.05, rely = 0.2)
 
 
 # [Import/Export Data] Settings
-fn5_import = tk.Button(tab5, height = 3, width = 11, text = "Import")
-fn5_export = tk.Button(tab5, height = 3, width = 11, text = "Export")
+tb5_message = tk.Label(tab5, text = "Functions:") 
+bt5_import = tk.Button(tab5, height = 2, width = 11, text = "Import", command = l_import)
+bt5_export = tk.Button(tab5, height = 2, width = 11, text = "Export", command = l_export)
 
-fn5_import.place(relx = 0.05, rely = 0.75)
-fn5_export.place(relx = 0.25, rely = 0.75)
+tb5_message.place(relx = 0.05, rely = 0.05)
+bt5_import.place(relx = 0.05, rely = 0.15)
+bt5_export.place(relx = 0.05, rely = 0.25)
 
 
 # [Information] Settings
-fn6_help = tk.Button(tab6, height = 3, width = 12, text = "Help")
-fn6_about = tk.Button(tab6, height = 3, width = 12, text = "About")
+tb6_message = tk.Label(tab6, text = "Functions:") 
+bt6_help = tk.Button(tab6, height = 2, width = 11, text = "Help", command = help)
+bt6_about = tk.Button(tab6, height = 2, width = 11, text = "About", command = about)
 
-fn6_help.place(relx = 0.05, rely = 0.75)
-fn6_about.place(relx = 0.25, rely = 0.75)
+tb6_message.place(relx = 0.05, rely = 0.05)
+bt6_help.place(relx = 0.05, rely = 0.15)
+bt6_about.place(relx = 0.05, rely = 0.25)
 
 
 system.mainloop()
