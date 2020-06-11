@@ -1,1 +1,1 @@
-# GUI GPA Calculator
+# GPA Calculator
