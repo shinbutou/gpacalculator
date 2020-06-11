@@ -244,7 +244,7 @@ def l_export():
 
 
 def guide():
-    display6.set("*The standand procedure is listed below:\n\n"+
+    display6.set("*The standard procedure is listed below:\n\n"+
                  "1. Input or import data.\n"+
                  "2. Check the data. (optional)\n"+
                  "3. Choose the preferable GPA scale. (optional)\n"+
