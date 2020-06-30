@@ -49,7 +49,7 @@ def new(p):
         return 3.7
     elif p >= 85 and p < 90:
         return 4
-    elif p >= 90 and p < 100:
+    elif p >= 90 and p <= 100:
         return 4.3
     else:
         return 0
