@@ -1,3 +1,9 @@
 # ReadMe
 
-A personal side project started from the course "Programming 101" in Spring 2019 (1082), a Grade Point Average (GPA) Calculator written in Python. The calculator was first developed into a command line interface form, and was later modified into a graphical interface application with Tkinter.
+The repository is dedicated to a personal side project developed throughout two courses at National Chengchi University. 
+
+* Course Name: Programming 101
+* Course ID: 043039031
+* Semester: Spring 2018 (1072)
+
+In summary, the project contains a Grade Point Average (GPA) Calculator written in Python. The calculator was first developed into a command line interface form, and was later modified into a graphical interface application with Tkinter.
