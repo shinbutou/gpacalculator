@@ -5,7 +5,7 @@ The repository is dedicated to a personal side project developed throughout two 
 * Course ID: 043039031
 * Semester: Spring 2019 (1072)
 
-A year later, it was re-written with a graphical interface with Tkinter for the group project.
+A year later, it was re-written with a graphical interface with Tkinter in the general education course.
 
 * Course Name: Exploring the Digital Wonderland
 * Course ID: 043028001
