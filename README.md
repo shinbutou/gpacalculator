@@ -10,3 +10,5 @@ A year later, it was re-written with a graphical interface with Tkinter. The exp
 * Course Name: Exploring the Digital Wonderland
 * Course ID: 043028001
 * Semester: Spring 2020 (1082)
+
+## Snapshot
